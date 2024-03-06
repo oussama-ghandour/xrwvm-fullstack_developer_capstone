@@ -1,6 +1,10 @@
 <html>
 <head>
   <!-- Link the style sheet here -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="static/style.css">
+  <link rel="stylesheet" href="static/bootstrap.min.css">
 </head>
 <div>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
@@ -24,44 +28,59 @@
       </div>
     </div>
   </nav>
-  
-    <div class="card" style="width: 80%;margin: auto; margin-top:5%;">
-      <div class="banner" name="about-header">
-      <!-- Insert header information here -->
-      </div>
-      <div style="display: flex;flex-direction: row; margin:auto">
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person1</p>
-          <p>Person1 Title</p>
-          <p class="card-text">Some text that explains the person1 in about 2 short sentences</p>
-          <p>person1@example.com</p>
+  <section>
+    <div class="card" style="width: 80%;margin: auto; margin-top:2%;">
+        <div class="banner text-center" name="about-header" style="margin-top:5px">
+            <!-- Insert header information here -->
+            <h1 class="mb-4">About Us</h1>
+            <p class="mb-4 pb-2 mb-md-5 pb-md-0"> 
+                Welcome to Cars dealership,home to the cars in North America. We deal in sale of domestic and imported cars at reasonable prices.
+            </p>
         </div>
-      </div>
-
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person2</p>
-          <p>Person2 Title</p>
-          <p class="card-text">Some text that explains the person2 in about 2 short sentences</p>
-          <p>person2@example.com</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;width:80%;margin-left:130px;margin-top:1px;">
+        <div class="card" style="width: 30%;margin-bottom: 20px;">
+            <div class="avatar mx-auto bg-white">
+                <img class="rounded float-start" src="/static/person1.jpg" style="width: 250px"alt="Card image">
+            </div>
+            <div class="card-body">
+                <div class="border border-success p-1 mb-1">
+                    <h6 class="text-center">CEO</h6>
+                </div>
+                <p class="mb-4 text-center">John Wilton</p>
+                <p class="dark-grey-text mt-4">"My primary responsability is to establish the overaching direction and strategy of the company"</p>
+                <p>person1@example.com</p>
+            </div>
         </div>
-      </div>
-
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person3</p>
-          <p>Person3 Title</p>
-          <p class="card-text">Some text that explains the person3 in about 2 short sentences</p>
-          <p>person3@example.com</p>
+        <div class="card" style="width: 35%;margin-bottom: 20px;">
+            <div class="avatar mx-auto bg-white">
+                <img class="rounded float-start" src="/static/person2.jpg" style="width: 250px" alt="Card image">
+            </div>
+            <div class="card-body">
+                <div class="border border-success p-1 mb-1">
+                    <h6 class="text-center">CMO</h6>
+                </div>
+                <p class="mb-4 text-center">Anna Watson</p>
+                <p class="dark-grey-text mt-2">"My responsibility is to develop marketing strategies aimed at managing the company's brand identity"</p>
+                <p>person2@example.com</p>
+            </div>
         </div>
-      </div>
+        <div class="card" style="width: 33%;margin-bottom: 20px;">
+            <div class="avatar mx-auto bg-white">
+                <img class="rounded float-start" src="/static/person3.jpg" style="width: 250px" alt="Card image">
+            </div>
+            <div class="card-body">
+                <div class="border border-success p-1 b-1">
+                    <h6 class="text-center">CFO</h6>
+                </div>
+                <p class="mb-4 text-center">John Smith</p>
+                <p class="dark-grey-text mt-4">"My responsibility is to provide leadership to the finance and accountability in financial operations"</p>
+                <p>person3@example.com</p>
+            </div>
+        </div>
     </div>
     </div>
-    </div>
+    </div> 
+  </section>
     
 </div>
 
