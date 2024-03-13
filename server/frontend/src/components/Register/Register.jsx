@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from '../Header/Header';
 import "./Register.css";
 import user_icon from "../assets/person.png"
 import email_icon from "../assets/email.png"
@@ -49,74 +50,78 @@ const Register = () => {
     };
 
     return (
-        <div className="register_container" style={{width: "50%"}}>
-            <div className="header" style={{display: "flex",flexDirection: "row", justifyContent: "space-between"}}>
-                <span className="text" style={{flexGrow:"1"}}>SignUp</span> 
-                <div style={{display: "flex",flexDirection: "row", justifySelf: "end", alignSelf: "start" }}>
-                    <a href="/" onClick={()=>{gohome()}} style={{justifyContent: "space-between", alignItems:"flex-end"}}>
-                        <img style={{width:"1cm"}} src={close_icon} alt="X"/>
-                    </a>
+        <div>
+            <Header />
+            <div className="register_container" style={{width: "50%"}}>
+                <div className="header" style={{display: "flex",flexDirection: "row", justifyContent: "space-between"}}>
+                    <span className="text" style={{flexGrow:"1", marginLeft:"150px"}}>SignUp</span> 
+                    <div style={{display: "flex",flexDirection: "row", justifySelf: "end", alignSelf: "start" }}>
+                        <a href="/" onClick={()=>{gohome()}} style={{justifyContent: "space-between", alignItems:"flex-end"}}>
+                            <img style={{width:"1cm"}} src={close_icon} alt="X"/>
+                        </a>
+                    </div>
+                    <hr/>
                 </div>
-                <hr/>
+                <form onSubmit={register}>
+                    <div className="inputs">
+                        <div className="input">
+                            <img src={user_icon} className="img_icon" alt='Username'/>
+                            <input 
+                                type="text"  
+                                name="username" 
+                                placeholder="Username" 
+                                className="input_field" 
+                                onChange={(e) => setUserName(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <img src={user_icon} className="img_icon" alt='First Name'/>
+                            <input 
+                                type="text" 
+                                name="first_name" 
+                                placeholder="First Name" 
+                                className="input_field" 
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <img src={user_icon} className="img_icon" alt='Last Name'/>
+                            <input 
+                                type="text" 
+                                name="last_name" 
+                                placeholder="Last Name" 
+                                className="input_field" 
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <img src={email_icon} className="img_icon" alt='Email'/>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="email" 
+                                className="input_field" 
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div className="input">
+                            <img src={password_icon} className="img_icon" alt='password'/>
+                            <input 
+                                name="psw" 
+                                type="password"  
+                                placeholder="Password" 
+                                className="input_field" 
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <div className="submit_panel">
+                        <input className="submit" type="submit" value="Register"/>
+                    </div>
+                </form>
             </div>
-            <form onSubmit={register}>
-                <div className="inputs">
-                    <div className="input">
-                        <img src={user_icon} className="img_icon" alt='Username'/>
-                        <input 
-                            type="text"  
-                            name="username" 
-                            placeholder="Username" 
-                            className="input_field" 
-                            onChange={(e) => setUserName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <img src={user_icon} className="img_icon" alt='First Name'/>
-                        <input 
-                            type="text" 
-                            name="first_name" 
-                            placeholder="First Name" 
-                            className="input_field" 
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <img src={user_icon} className="img_icon" alt='Last Name'/>
-                        <input 
-                            type="text" 
-                            name="last_name" 
-                            placeholder="Last Name" 
-                            className="input_field" 
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <img src={email_icon} className="img_icon" alt='Email'/>
-                        <input 
-                            type="email" 
-                            name="email" 
-                            placeholder="email" 
-                            className="input_field" 
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-                    <div className="input">
-                        <img src={password_icon} className="img_icon" alt='password'/>
-                        <input 
-                            name="psw" 
-                            type="password"  
-                            placeholder="Password" 
-                            className="input_field" 
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <div className="submit_panel">
-                    <input className="submit" type="submit" value="Register"/>
-                </div>
-            </form>
         </div>
+        
     )
 
 }
