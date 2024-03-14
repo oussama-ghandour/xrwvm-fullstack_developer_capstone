@@ -52,9 +52,9 @@ const Register = () => {
     return (
         <div>
             <Header />
-            <div className="register_container" style={{width: "50%"}}>
+            <div className="register_container" style={{width: "40%", height: "80%", marginLeft:"100px"}}>
                 <div className="header" style={{display: "flex",flexDirection: "row", justifyContent: "space-between"}}>
-                    <span className="text" style={{flexGrow:"1", marginLeft:"150px"}}>SignUp</span> 
+                    <span className="text" style={{flexGrow:"0.5", marginLeft:"160px"}}>Join Us!</span>
                     <div style={{display: "flex",flexDirection: "row", justifySelf: "end", alignSelf: "start" }}>
                         <a href="/" onClick={()=>{gohome()}} style={{justifyContent: "space-between", alignItems:"flex-end"}}>
                             <img style={{width:"1cm"}} src={close_icon} alt="X"/>
@@ -62,6 +62,7 @@ const Register = () => {
                     </div>
                     <hr/>
                 </div>
+                <p style={{flexGrow:"0.2", marginLeft:"60px"}} className="text-description">Please provide all required details to register your account with us.</p>
                 <form onSubmit={register}>
                     <div className="inputs">
                         <div className="input">

@@ -1,7 +1,6 @@
 .navcontainer{
   display: flex;
   flex: 1;
-
   flex-direction: row;
   margin: auto;
   margin-top: 2%;
@@ -83,4 +82,44 @@
   align-items: center;
   vertical-align: middle;
   
+}
+
+.login_container{
+  margin: auto;
+  margin-top: 4%;
+  font-family: Montserrat,Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  min-width: 350px;
+  padding: 20px;
+  width:500px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border:1px solid #ccc;
+  border-radius:10px;
+  background:white;
+  -webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+  -moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+  box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+}
+
+.button_submit{
+    display: flex;
+    flex-direction: row;
+}
+
+.message {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+  }
+.message a {
+    color: darkturquoise;
+    text-decoration: none;
+    margin-left: 3px;
 }

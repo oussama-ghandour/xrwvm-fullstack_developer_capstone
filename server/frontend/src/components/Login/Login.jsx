@@ -50,21 +50,22 @@ const Login = ({ onClose }) => {
         }}
         className='modalContainer'
       >
-          <form className="login_panel" style={{}} onSubmit={login}>
-              <div>
-              <span className="input_field">Username </span>
-              <input type="text"  name="username" placeholder="Username" className="input_field" onChange={(e) => setUserName(e.target.value)}/>
-              </div>
-              <div>
-              <span className="input_field">Password </span>
-              <input name="psw" type="password"  placeholder="Password" className="input_field" onChange={(e) => setPassword(e.target.value)}/>            
-              </div>
-              <div>
-              <input className="action_button" type="submit" value="Login"/>
-              <input className="action_button" type="button" value="Cancel" onClick={()=>setOpen(false)}/>
-              </div>
-              <a className="loginlink" href="/register">Register Now</a>
-          </form>
+        <div className="login_container">
+            <form className="login_panel" style={{}} onSubmit={login}>
+                <div>
+                <input type="text"  name="username" placeholder="Username" className="input_field" onChange={(e) => setUserName(e.target.value)}/>
+                </div>
+                <div>
+                <input name="psw" type="password"  placeholder="Password" className="input_field" onChange={(e) => setPassword(e.target.value)}/>            
+                </div>
+                <div className="button_submit">
+                <input className="action_button" type="submit" value="Login"/>
+                <input className="action_button" type="button" value="Cancel" onClick={()=>setOpen(false)}/>
+                </div>
+                <p className="message">Not Registered?<a className="loginlink" href="/register">Create an account</a></p>
+            </form>
+        </div>
+          
       </div>
     </div>
     </div>
