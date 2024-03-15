@@ -44,8 +44,10 @@ img{
 .homepage_links{
   color:  rgb(97, 64, 128);
   padding: 25%;
-  font-size: larger;
-  }
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
 
 .loginlink{
   display: flex;
@@ -123,4 +125,47 @@ img{
     border-radius:50px;
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
+}
+
+.container-fluid{
+    box-shadow: 0px 5px 10px 0px #aaa;
+    position: fixed;
+    opacity: 0.85;
+    z-index: 100;
+}
+
+.nav-item a{
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+/***************************
+         HEADER
+****************************/
+header{
+    width:100%;
+    background:linear-gradient(to right, rgba(1,1,1,0.9) 10%, rgba(1,1,1,0.6) 50%, rgba(1,1,1,0.4) 100%), url("https://i.postimg.cc/GhmvMRWG/header.jpg");
+    background-size:cover;
+    background-position:center;
+    color:var(--white);
+    flex-wrap:wrap;
+}
+
+header article{
+    padding:6rem 2rem;
+    flex: 0 0 60%;
+}
+
+header article .title{
+    margin:0.5em 0;
+}
+
+header article .btn_3:after{
+    content:"\f0f4";
+}
+
+@media (max-width:920px){
+    header article{
+        flex: 0 0 100%;
+        padding:6rem 0rem;
+    }
 }

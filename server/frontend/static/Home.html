@@ -40,7 +40,7 @@ let checkSession = ()=>{
 </script>
 </head>
 <body onload="checkSession()">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:darkturquoise; height: 1in;">
   <div class="container-fluid">
     <h2 style="padding-right: 5%;">Dealerships</h2>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ let checkSession = ()=>{
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" style="font-size: larger;" aria-current="page" href="#">Home</a>
+          <a class="nav-link" style="font-size: larger;" href="#">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
@@ -66,10 +66,19 @@ let checkSession = ()=>{
   </div>
 </nav>
 <div style="display: flex;flex-direction: column;">
-<div class="card" style="width: 40%;margin-top: 50px;align-self: center;">
-  <img src="static/car_dealership.jpg" class="card-img-top" alt="...">
-  <div class="banner">
-    <h5>Welcome to our Dealerships!</h5>
+<div  style="width: 100%;margin-top: 150px;align-self: center;">
+<h5 style="margin-bottom:50px;display: flex;flex-direction: column;align-items: center;justify-content: center;">Welcome to our Dealerships, Where Modern Meets Automotive Excellence!!</h5>
+ <!-- Call to Action -->
+<!--HEADER-->
+<header class="flex padding_2x">
+    <article>
+        <h4 class="sub_title small" style="color:white;"><em>Looking</em> For <em>Modern</em> Cars?</h4>
+        <h4 class="sub_title small" style="color:white;margin-bottom:50px;">Discover the latest in automotive excellence right here. We're all about modernity and top-notch vehicles. From sleek sedans to robust SUVs, we've got something for everyone.</h4>
+        <h1 class="title big">Easy Way To Find The Right Car Within A Minute</h1>
+        <a href="#"style="color:white;display: flex;flex-direction: column;align-items: center;justify-content: center;text-decoration:none;margin-top:30px;">Ready to GET Started ?</a>
+    </article>
+</header>
+  <div class="banner" style="margin-top:50px;">
     <a href="/dealers" class="btn" style="background-color: aqua;margin:10px">View Dealerships</a>
   </div>
 </div>
