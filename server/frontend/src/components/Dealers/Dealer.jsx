@@ -24,32 +24,55 @@ const Dealer = () => {
   let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
   let post_review = root_url+`postreview/${id}`;
   
-  const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      setDealer(dealerobjs[0])
-    }
-  }
-
-  const get_reviews = async ()=>{
-    const res = await fetch(reviews_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      if(retobj.reviews.length > 0){
-        setReviews(retobj.reviews)
-      } else {
-        setUnreviewed(true);
+  const get_dealer = async () => {
+    try {
+      const res = await fetch(dealer_url, {
+        method: "GET"
+      });
+  
+      if (!res.ok) {
+        throw new Error('Failed to fetch dealer');
       }
+  
+      const retobj = await res.json();
+  
+      if (retobj && retobj.status === 200 && retobj.dealer && retobj.dealer.length > 0) {
+        setDealer(retobj.dealer[0]);
+      } else {
+        console.error('Invalid response format:', retobj);
+      }
+    } catch (error) {
+      console.error('Error fetching dealer:', error);
     }
   }
+  
+
+  const get_reviews = async () => {
+    try {
+      const res = await fetch(reviews_url, {
+        method: "GET"
+      });
+  
+      if (!res.ok) {
+        throw new Error('Failed to fetch reviews');
+      }
+  
+      const retobj = await res.json();
+  
+      if (retobj && retobj.status === 200) {
+        if (retobj.reviews && retobj.reviews.length > 0) {
+          setReviews(retobj.reviews);
+        } else {
+          setUnreviewed(true);
+        }
+      } else {
+        console.error('Invalid response format:', retobj);
+      }
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  }
+  
 
   const senti_icon = (sentiment)=>{
     let icon = sentiment === "positive"?positive_icon:sentiment==="negative"?negative_icon:neutral_icon;
