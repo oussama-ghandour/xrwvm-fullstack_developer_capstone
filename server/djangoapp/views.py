@@ -12,6 +12,7 @@ import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
+from .restapis import get_request, analyze_review_sentiments, post_review
 
 
 # Get an instance of a logger
@@ -85,7 +86,7 @@ def get_cars(request):
     return JsonResponse({"CarModels": cars})  
 
 # Update the `get_dealerships` view to render the index page 
-def get_dealerships(request):
+def get_dealerships(request, state="All"):
     # render a list of dealerships
     if(state == "All"):
         endpoint = "/fetchDealers"
