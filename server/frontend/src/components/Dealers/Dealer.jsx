@@ -9,8 +9,6 @@ import review_icon from "../assets/reviewbutton.png"
 import Header from '../Header/Header';
 
 const Dealer = () => {
-
-
   const [dealer, setDealer] = useState({});
   const [reviews, setReviews] = useState([]);
   const [unreviewed, setUnreviewed] = useState(false);
@@ -53,13 +51,19 @@ const Dealer = () => {
         method: "GET"
       });
   
+      console.log("GET Reviews Request:", res); // Log the request object
+  
       if (!res.ok) {
         throw new Error('Failed to fetch reviews');
       }
   
       const retobj = await res.json();
   
-      if (retobj && retobj.status === 200) {
+      console.log("GET Reviews Response:", retobj); // Log the response object
+  
+      if (retobj && retobj.status === 404 && retobj.message === "No reviews found") {
+        setUnreviewed(true);
+      } else if (retobj && retobj.status === 200) {
         if (retobj.reviews && retobj.reviews.length > 0) {
           setReviews(retobj.reviews);
         } else {
@@ -72,8 +76,6 @@ const Dealer = () => {
       console.error('Error fetching reviews:', error);
     }
   }
-  
-
   const senti_icon = (sentiment)=>{
     let icon = sentiment === "positive"?positive_icon:sentiment==="negative"?negative_icon:neutral_icon;
     return icon;
@@ -83,9 +85,7 @@ const Dealer = () => {
     get_dealer();
     get_reviews();
     if(sessionStorage.getItem("username")) {
-      setPostReview(<a href={post_review}><img src={review_icon} style={{width:'10%',marginLeft:'10px',marginTop:'10px'}} alt='Post Review'/></a>)
-
-      
+      setPostReview(<a href={post_review}><img src={review_icon} style={{width:'10%',marginLeft:'10px',marginTop:'10px'}} alt='Post Review'/></a>) 
     }
   },[]);  
 

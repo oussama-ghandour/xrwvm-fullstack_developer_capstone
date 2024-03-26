@@ -11,6 +11,8 @@ const PostReview = () => {
   const [model, setModel] = useState();
   const [year, setYear] = useState("");
   const [date, setDate] = useState("");
+  const [reviews, setReviews] = useState([]);
+  const [unreviewed, setUnreviewed] = useState(false);
   const [carmodels, setCarmodels] = useState([]);
 
   let curr_url = window.location.href;
@@ -20,6 +22,7 @@ const PostReview = () => {
   let dealer_url = root_url+`djangoapp/dealer/${id}`;
   let review_url = root_url+`djangoapp/add_review`;
   let carmodels_url = root_url+`djangoapp/get_cars`;
+  let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
 
   const postreview = async ()=>{
     let name = sessionStorage.getItem("firstname")+" "+sessionStorage.getItem("lastname");
@@ -75,6 +78,38 @@ const PostReview = () => {
     }
   }
 
+  const get_reviews = async () => {
+    try {
+      const res = await fetch(reviews_url, {
+        method: "GET"
+      });
+  
+      console.log("GET Reviews Request:", res); // Log the request object
+  
+      if (!res.ok) {
+        throw new Error('Failed to fetch reviews');
+      }
+  
+      const retobj = await res.json();
+  
+      console.log("GET Reviews Response:", retobj); // Log the response object
+  
+      if (retobj && retobj.status === 404 && retobj.message === "No reviews found") {
+        setUnreviewed(true);
+      } else if (retobj && retobj.status === 200) {
+        if (retobj.reviews && retobj.reviews.length > 0) {
+          setReviews(retobj.reviews);
+        } else {
+          setUnreviewed(true);
+        }
+      } else {
+        console.error('Invalid response format:', retobj);
+      }
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  }
+
   const get_cars = async ()=>{
     const res = await fetch(carmodels_url, {
       method: "GET"
@@ -87,7 +122,8 @@ const PostReview = () => {
   useEffect(() => {
     get_dealer();
     get_cars();
-  },[]);
+    get_reviews();
+  },[id]);
 
 
   return (
