@@ -46,16 +46,23 @@ const Dealers = () => {
   };
 
   const get_dealers = async () => {
-    const res = await fetch("/djangoapp/get_dealers", {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    if (retobj.status === 200) {
-      setDealersList(retobj.dealers);
-      const states = Array.from(new Set(retobj.dealers.map(dealer => dealer.state)));
-      setStates(["All", ...states]);
+    try {
+      const res = await fetch("/djangoapp/get_dealers", {
+        method: "GET"
+      });
+      const retobj = await res.json();
+      if (retobj.status === 200) {
+        setDealersList(retobj.dealers);
+        const states = Array.from(new Set(retobj.dealers.map(dealer => dealer.state)));
+        setStates(["All", ...states]);
+      } else {
+        console.error("Failed to fetch dealers:", retobj.error);
+      }
+    } catch (error) {
+      console.error("Error fetching dealers:", error);
     }
   };
+  
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -121,19 +128,19 @@ const Dealers = () => {
           </tbody>
         </table>
       </div>
-      <div className="pagination">
-        <button className="backward" id="first" onClick={firstPage}>first</button>
-        <button className="backward" id="prev" onClick={prevPage}>previous</button>
-        <button className="forward" id="next" onClick={nextPage}>next</button>
-        <button className="forward" id="last" onClick={lastPage}>last</button>
-        <div className="page-numbers" id="pageNumbers">
-          {Array.from({ length: numberOfPages }, (_, i) => (
-            <span key={i} className={currentPage === i + 1 ? 'page-number active' : 'page-number'} onClick={() => paginate(i + 1)}>
-              {i + 1}
-            </span>
-          ))}
+        <div className="pagination">
+                <button className="backward" id="first" onClick={firstPage}>first</button>
+                <button className="backward" id="prev" onClick={prevPage}>previous</button>
+                <button className="forward" id="next" onClick={nextPage}>next</button>
+                <button className="forward" id="last" onClick={lastPage}>last</button>
+                <div className="page-numbers" id="pageNumbers">
+                {Array.from({ length: numberOfPages }, (_, i) => (
+                    <span key={i} className={currentPage === i + 1 ? 'page-number active' : 'page-number'} onClick={() => paginate(i + 1)}>
+                    {i + 1}
+                    </span>
+                ))}
+                </div>
         </div>
-      </div>
     </div>
   );
 };
