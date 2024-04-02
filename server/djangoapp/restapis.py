@@ -28,14 +28,19 @@ def get_request(endpoint, **kwargs):
         print("Network exception occurred")
 
 def analyze_review_sentiments(text):
-    request_url = sentiment_analyzer_url+"analyze/"+text
+    request_url = sentiment_analyzer_url + "analyze/" + text
     try:
         # Call get method of requests library with URL and parameters
         response = requests.get(request_url)
+        response.raise_for_status()  # Raise an exception for HTTP errors
         return response.json()
+    except requests.RequestException as err:
+        print(f"Request Exception occurred: {err}")
+        return None
     except Exception as err:
-        print(f"Unexpected {err=}, {type(err)=}")
-        print("Network exception occurred")
+        print(f"Unexpected error occurred: {err}")
+        return None
+
 
 def post_review(data_dict):
     request_url = backend_url+"/insert_review"
