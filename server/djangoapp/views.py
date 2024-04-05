@@ -26,7 +26,10 @@ def login_user(request):
         return JsonResponse(data)
     except Exception as e:
         logger.error(f"Error during login: {e}")
-        return JsonResponse({"error": "An error occurred during login"}, status=500)
+        return JsonResponse(
+            {"error": "An error occurred during login"},
+            status=500
+        )
 
 
 def logout_request(request):
@@ -35,7 +38,10 @@ def logout_request(request):
         return JsonResponse(data)
     except Exception as e:
         logger.error(f"Error during logout: {e}")
-        return JsonResponse({"error": "An error occurred during logout"}, status=500)
+        return JsonResponse(
+            {"error": "An error occurred during logout"},
+            status=500
+        )
 
 
 @csrf_exempt
@@ -49,8 +55,13 @@ def registration(request):
         email = data['email']
         username_exist = User.objects.filter(username=username).exists()
         if not username_exist:
-            user = User.objects.create_user(username=username, password=password,
-                                            first_name=first_name, last_name=last_name, email=email)
+            user = User.objects.create_user(
+                username=username,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+                email=email
+            )
             login(request, user)
             data = {"userName": username, "status": "Authenticated"}
             return JsonResponse(data)
@@ -59,7 +70,10 @@ def registration(request):
             return JsonResponse(data)
     except Exception as e:
         logger.error(f"Error during registration: {e}")
-        return JsonResponse({"error": "An error occurred during registration"}, status=500)
+        return JsonResponse(
+            {"error": "An error occurred during registration"},
+            status=500
+        )
 
 
 @csrf_exempt
@@ -69,11 +83,20 @@ def get_cars(request):
         if count == 0:
             initiate()
         car_models = CarModel.objects.select_related('car_make')
-        cars = [{"CarModel": car_model.name, "CarMake": car_model.car_make.name} for car_model in car_models]
+        cars = [
+            {
+                "CarModel": car_model.name,
+                "CarMake": car_model.car_make.name
+            }
+            for car_model in car_models
+        ]
         return JsonResponse({"CarModels": cars})
     except Exception as e:
         logger.error(f"Error while fetching cars: {e}")
-        return JsonResponse({"error": "An error occurred while fetching cars"}, status=500)
+        return JsonResponse(
+            {"error": "An error occurred while fetching cars"},
+            status=500
+        )
 
 
 def get_dealerships(request, state="All"):
@@ -86,7 +109,10 @@ def get_dealerships(request, state="All"):
         return JsonResponse({"status": 200, "dealers": dealerships})
     except Exception as e:
         logger.error(f"Error while fetching dealerships: {e}")
-        return JsonResponse({"error": "An error occurred while fetching dealerships"}, status=500)
+        return JsonResponse(
+            {"error": "An error occurred while fetching dealerships"},
+            status=500
+        )
 
 
 @csrf_exempt
@@ -100,7 +126,10 @@ def get_dealer_details(request, dealer_id):
             return JsonResponse({"status": 400, "message": "Bad Request"})
     except Exception as e:
         logger.error(f"Error while fetching dealer details: {e}")
-        return JsonResponse({"error": "An error occurred while fetching dealer details"}, status=500)
+        return JsonResponse(
+            {"error": "An error occurred while fetching dealer details"},
+            status=500
+        )
 
 
 @csrf_exempt
@@ -111,19 +140,27 @@ def get_dealer_reviews(request, dealer_id):
             reviews = get_request(endpoint)
             if reviews:
                 for review_detail in reviews:
-                    response = analyze_review_sentiments(review_detail['review'])
+                    response = analyze_review_sentiments(
+                        review_detail['review']
+                    )
                     if response:
                         review_detail['sentiment'] = response.get('sentiment')
                     else:
                         review_detail['sentiment'] = None
                 return JsonResponse({"status": 200, "reviews": reviews})
             else:
-                return JsonResponse({"status": 404, "message": "No reviews found"})
+                return JsonResponse({
+                    "status": 404,
+                    "message": "No reviews found"
+                })
         else:
             return JsonResponse({"status": 400, "message": "Bad Request"})
     except Exception as e:
         logger.error(f"Error while fetching dealer reviews: {e}")
-        return JsonResponse({"error": "An error occurred while fetching dealer reviews"}, status=500)
+        return JsonResponse(
+            {"error": "An error occurred while fetching dealer reviews"},
+            status=500
+        )
 
 
 @csrf_exempt
@@ -131,10 +168,13 @@ def add_review(request):
     try:
         if not request.user.is_anonymous:
             data = json.loads(request.body)
-            response = post_review(data)
+            response = post_review(data) # noqa
             return JsonResponse({"status": 200})
         else:
             return JsonResponse({"status": 403, "message": "Unauthorized"})
     except Exception as e:
         logger.error(f"Error while adding review: {e}")
-        return JsonResponse({"error": "An error occurred while adding review"}, status=500)
+        return JsonResponse(
+            {"error": "An error occurred while adding review"},
+            status=500
+        )
