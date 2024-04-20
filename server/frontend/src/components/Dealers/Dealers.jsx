@@ -8,7 +8,8 @@ const Dealers = () => {
   const [dealersList, setDealersList] = useState([]);
   const [states, setStates] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [searchQuery, setSearchQuery] = useState('');
+  const [originalDealers, setOriginalDealers] = useState([]);
   const numberPerPage = 10;
   const rows = Array.from(document.querySelectorAll('tbody tr'));
   const numberOfPages = Math.ceil(rows.length / numberPerPage);
@@ -55,6 +56,7 @@ const Dealers = () => {
         setDealersList(retobj.dealers);
         const states = Array.from(new Set(retobj.dealers.map(dealer => dealer.state)));
         setStates(["All", ...states]);
+        setOriginalDealers(retobj.dealers);
       } else {
         console.error("Failed to fetch dealers:", retobj.error);
       }
@@ -90,6 +92,23 @@ const Dealers = () => {
 
   const isLoggedIn = sessionStorage.getItem("username") != null;
 
+  // Manage input changes and filter the dealers based on the entered state query
+  const handleInputChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    const filtered = originalDealers.filter(dealer =>
+        dealer.state.toLowerCase().includes(query.toLowerCase())
+    );
+    setDealersList(filtered);
+  };
+
+  // if user leaves the search input empty
+  const handleLostFocus = () => {
+    if (!searchQuery) {
+        setDealersList(originalDealers);
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -103,12 +122,19 @@ const Dealers = () => {
               <th>Address</th>
               <th>Zip</th>
               <th>
-                <select name="state" id="state" onChange={(e) => filterDealers(e.target.value)}>
+                <input 
+                    type="text" 
+                    placeholder="Search..." 
+                    onChange={handleInputChange} 
+                    onBlur={handleLostFocus} 
+                    value={searchQuery}
+                />
+                {/* <select name="state" id="state" onChange={(e) => filterDealers(e.target.value)}>
                   <option value="" disabled hidden>State</option>
                   {states.map(state => (
                     <option key={state} value={state}>{state}</option>
                   ))}
-                </select>
+                </select> */}
               </th>
               {isLoggedIn && <th>Review Dealer</th>}
             </tr>
