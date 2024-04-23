@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_exempt
 from .models import CarMake, CarModel
 from .populate import initiate
-from .restapis import get_request, analyze_review_sentiments, post_review,searchcars_request
+from .restapis import get_request, analyze_review_sentiments, post_review, searchcars_request # noqa
 import logging
 import json
 
@@ -190,7 +190,7 @@ def get_inventory(request, dealer_id):
         elif 'model' in data:
             endpoint = "/carsbymodel/" + str(dealer_id) + "/" + data['model']
         elif 'mileage' in data:
-            endpoint = "/carsbymaxmileage/" + str(dealer_id) + "/" + data["mileage"]
+            endpoint = "/carsbymaxmileage/" + str(dealer_id) + "/" + data["mileage"] # noqa
         elif 'price' in data:
             endpoint = "/carsbyprice/" + str(dealer_id) + "/" + data["price"]
         else:
