@@ -66,20 +66,22 @@ app.get('/carsbymodel/:id/:model', async (req, res) => {
 
 // cars mileage
 app.get('/carsbymaxmileage/:id/:mileage', async (req, res) => {
-  try {
-    let mileage = parseInt(req.params.mileage)
-    let condition = {};
-    condition =
-        mileage === 50000 ? { $lte: mileage } :
-        mileage === 100000 ? { $lte: mileage, $gt: 50000 } :
-        mileage === 150000 ? { $lte: mileage, $gt: 100000 } :
-        mileage === 200000 ? { $lte: mileage, $gt: 150000 } :
-        { $gt: 200000 };
-    const documents = await Cars.find({ dealer_id: req.params.id, mileage : condition });
-    res.json(documents);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching dealers by ID' });
-  }
+    try {
+        let mileage = parseInt(req.params.mileage)
+        let condition = {};
+        // conditions based on the mileage
+        condition =
+            mileage === 50000 ? { $lte: mileage } :
+            mileage === 100000 ? { $lte: mileage, $gt: 50000 } :
+            mileage === 150000 ? { $lte: mileage, $gt: 100000 } :
+            mileage === 200000 ? { $lte: mileage, $gt: 150000 } :
+            { $gt: 200000 };
+        // fetching cars by dealerID and mileage
+        const documents = await Cars.find({ dealer_id: req.params.id, mileage : condition });
+        res.json(documents);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching dealers by ID' });
+    }
 });
 
 // cars price
@@ -87,17 +89,19 @@ app.get('/carsbyprice/:id/:price', async (req, res) => {
     try {
         let price = parseInt(req.params.price)
         let condition = {}
+        // conditions based on the price range
         condition =
-        price === 20000 ? { $lte: price } :
-        price === 40000 ? { $lte: price, $gt: 20000 } :
-        price === 60000 ? { $lte: price, $gt: 40000 } :
-        price === 80000 ? { $lte: price, $gt: 60000 } :
-        { $gt: 80000 };
+            price === 20000 ? { $lte: price } :
+            price === 40000 ? { $lte: price, $gt: 20000 } :
+            price === 60000 ? { $lte: price, $gt: 40000 } :
+            price === 80000 ? { $lte: price, $gt: 60000 } :
+            { $gt: 80000 };
+        // fetching cars by dealerID and price
         const documents = await Cars.find({ dealer_id: req.params.id, price : condition });
         res.json(documents);
-      } catch (error) {
+    } catch (error) {
         res.status(500).json({ error: 'Error fetching dealers by ID' });
-      }
+    }
 });
 
 

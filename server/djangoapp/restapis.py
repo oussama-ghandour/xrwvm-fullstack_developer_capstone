@@ -33,6 +33,7 @@ def get_request(endpoint, **kwargs):
         # If any error occurs
         print(f"Network exception occurred: {e}")
 
+
 # search cars method
 def searchcars_request(endpoint, **kwargs):
     params = ""
