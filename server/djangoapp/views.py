@@ -180,22 +180,21 @@ def add_review(request):
         )
 
 
+# view for the inventory
 def get_inventory(request, dealer_id):
     data = request.GET
-    if (dealer_id):
-        if 'year' in data:
-            endpoint = "/carsbyyear/" + str(dealer_id) + "/" + data['year']
-        elif 'make' in data:
-            endpoint = "/carsbymake/" + str(dealer_id) + "/" + data['make']
-        elif 'model' in data:
-            endpoint = "/carsbymodel/" + str(dealer_id) + "/" + data['model']
-        elif 'mileage' in data:
-            endpoint = "/carsbymaxmileage/" + str(dealer_id) + "/" + data["mileage"] # noqa
-        elif 'price' in data:
-            endpoint = "/carsbyprice/" + str(dealer_id) + "/" + data["price"]
-        else:
-            endpoint = "/cars/" + str(dealer_id)
-
+    # Check if dealer_id
+    if dealer_id:
+        # API endpoint based on the available params
+        endpoint = (
+            f"/carsbyyear/{dealer_id}/{data['year']}" if 'year' in data else
+            f"/carsbymake/{dealer_id}/{data['make']}" if 'make' in data else
+            f"/carsbymodel/{dealer_id}/{data['model']}" if 'model' in data else
+            f"/carsbymaxmileage/{dealer_id}/{data['mileage']}" if 'mileage' in data else # noqa
+            f"/carsbyprice/{dealer_id}/{data['price']}" if 'price' in data else
+            f"/cars/{dealer_id}"
+        )
+        # Make request to searchcars_request
         cars = searchcars_request(endpoint)
         return JsonResponse({"status": 200, "cars": cars})
     else:

@@ -33,12 +33,12 @@ def get_request(endpoint, **kwargs):
         # If any error occurs
         print(f"Network exception occurred: {e}")
 
-
+# search cars method
 def searchcars_request(endpoint, **kwargs):
     params = ""
     if kwargs:
         for key, value in kwargs.items():
-           params += f"{key}={value}&"
+            params += f"{key}={value}&"
 
     request_url = searchcars_url + endpoint + "?" + params
     print("GET from {} ".format(request_url))
@@ -50,6 +50,7 @@ def searchcars_request(endpoint, **kwargs):
         # If any error occurs
         print(f"Network exception occurred: {e}")
     finally:
+        # Succes completion
         print("GET request call complete!")
 
 
