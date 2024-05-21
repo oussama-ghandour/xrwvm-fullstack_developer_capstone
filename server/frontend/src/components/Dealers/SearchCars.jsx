@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../Header/Header';
+import './SearchCars.css';
 
 function SearchCars () {
   const [cars, setCars] = useState([]);
@@ -227,69 +228,78 @@ function SearchCars () {
       <Header />
       <h1 style={{ marginBottom: '20px'}}>Cars at {dealer.full_name}</h1>
       <div>
-      <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Make</span>
-      <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="make" id="make" onChange={SearchCarsByMake}>
-        {makes.length === 0 ? (
-          <option value=''>No data found</option>
-        ):(
-          <>
-          <option disabled defaultValue> -- All -- </option>
-          {makes.map((make, index) => (
-            <option key={index} value={make}>
-              {make}
-            </option>
-          ))}
-        </>
-        )        
-        }
-      </select>
-      <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Model</span>
-      <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="model" id="model" onChange={SearchCarsByModel}>
-      {models.length === 0 ? (
-        <option value=''>No data found</option>
-      ) : (
-        <>
-          <option disabled defaultValue> -- All -- </option>
-          {models.map((model, index) => (
-            <option key={index} value={model}>
-              {model}
-            </option>
-          ))}
-        </>
-      )}      
-      </select>
-      <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Year</span>
-      <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="year" id="year" onChange={SearchCarsByYear}>
-          <option selected value='all'> -- All -- </option>
-          <option value='2024'>2024 or newer</option>
-          <option value='2023'>2023 or newer</option>
-          <option value='2022'>2022 or newer</option>
-          <option value='2021'>2021 or newer</option>
-          <option value='2020'>2020 or newer</option>
-      </select>
-      <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Mileage</span>
-      <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="mileage" id="mileage" onChange={SearchCarsByMileage}>
-        <option selected value='all'> -- All -- </option>
-          <option value='50000'>Under 50000</option>
-          <option value='100000'>50000 - 100000</option>
-          <option value='150000'>100000 - 150000</option>
-          <option value='200000'>150000 - 200000</option>
-          <option value='200001'>Over 200000</option>
-      </select>
-      <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Price</span>
-      <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="price" id="price" onChange={SearchCarsByPrice}>
-          <option selected value='all'> -- All -- </option>
-          <option value='20000'>Under 20000</option>
-          <option value='40000'>20000 - 40000</option>
-          <option value='60000'>40000 - 60000</option>
-          <option value='80000'>60000 - 80000</option>
-          <option value='80001'>Over 80000</option>
-      </select>
-
-      <button style={{marginLeft: '10px', paddingLeft: '10px'}} onClick={reset}>Reset</button>
-
+        <div style={{display: 'flex',flexDirection: 'row',flexWrap: 'wrap'}}>
+            <div style={{width:"20%"}}>
+                <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Make</span>
+                    <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="make" id="make" onChange={SearchCarsByMake}>
+                        {makes.length === 0 ? (
+                        <option value=''>No data found</option>
+                        ):(
+                        <>
+                        <option disabled defaultValue> -- All -- </option>
+                        {makes.map((make, index) => (
+                            <option key={index} value={make}>
+                            {make}
+                            </option>
+                        ))}
+                        </>
+                        )        
+                        }
+                    </select>
+                </div>
+            <div style={{width:"20%"}}>
+                <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Model</span>
+                <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="model" id="model" onChange={SearchCarsByModel}>
+                {models.length === 0 ? (
+                    <option value=''>No data found</option>
+                ) : (
+                    <>
+                    <option disabled defaultValue> -- All -- </option>
+                    {models.map((model, index) => (
+                        <option key={index} value={model}>
+                        {model}
+                        </option>
+                    ))}
+                    </>
+                )}      
+                </select>
+            </div>
+            <div style={{width:"15%"}}>
+                <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Year</span>
+                <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="year" id="year" onChange={SearchCarsByYear}>
+                    <option selected value='all'> -- All -- </option>
+                    <option value='2024'>2024 or newer</option>
+                    <option value='2023'>2023 or newer</option>
+                    <option value='2022'>2022 or newer</option>
+                    <option value='2021'>2021 or newer</option>
+                    <option value='2020'>2020 or newer</option>
+                </select>
+            </div>
+            <div style={{width:"15%"}}>
+                <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Mileage</span>
+                <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="mileage" id="mileage" onChange={SearchCarsByMileage}>
+                    <option selected value='all'> -- All -- </option>
+                    <option value='50000'>Under 50000</option>
+                    <option value='100000'>50000 - 100000</option>
+                    <option value='150000'>100000 - 150000</option>
+                    <option value='200000'>150000 - 200000</option>
+                    <option value='200001'>Over 200000</option>
+                </select>
+            </div>
+            <div style={{width:"15%"}}>
+                <span style={{ marginLeft: '10px', paddingLeft: '10px'}}>Price</span>
+                <select style={{ marginLeft: '10px', marginRight: '10px' ,paddingLeft: '10px', borderRadius :'10px'}} name="price" id="price" onChange={SearchCarsByPrice}>
+                    <option selected value='all'> -- All -- </option>
+                    <option value='20000'>Under 20000</option>
+                    <option value='40000'>20000 - 40000</option>
+                    <option value='60000'>40000 - 60000</option>
+                    <option value='80000'>60000 - 80000</option>
+                    <option value='80001'>Over 80000</option>
+                </select>
+            </div>
+            <button className="button-reset" style={{marginLeft: '10px', paddingLeft: '10px'}} onClick={reset}>Reset</button>
+        </div>
       </div>
-
 
       <div style={{ marginLeft: '10px', marginRight: '10px' , marginTop: '20px'}} >
         {cars.length === 0 ? (
@@ -318,3 +328,7 @@ function SearchCars () {
 };
 
 export default SearchCars;
+
+
+
+

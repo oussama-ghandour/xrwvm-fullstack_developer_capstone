@@ -51,9 +51,7 @@ table{
   }
 
   .reviews_panel {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    
     column-gap: 1cm;
     overflow-wrap: normal;
     margin-top: 1cm;
