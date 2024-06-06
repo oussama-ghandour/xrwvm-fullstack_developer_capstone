@@ -3,6 +3,8 @@ import "./Dealers.css";
 import "../assets/style.css";
 import Header from '../Header/Header';
 import review_icon from "../assets/reviewicon.png"
+import Sidebar from '../SideBar/SideBar';
+import Box from '@mui/material/Box';
 
 const Dealers = () => {
   const [dealersList, setDealersList] = useState([]);
@@ -112,6 +114,9 @@ const Dealers = () => {
   return (
     <div>
       <Header />
+      <Box sx={{ display: 'flex' }}>
+      <Sidebar  />
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <div className="container">
         <table className='table'>
           <thead>
@@ -167,6 +172,8 @@ const Dealers = () => {
                 ))}
                 </div>
         </div>
+        </Box>
+        </Box>
     </div>
   );
 };

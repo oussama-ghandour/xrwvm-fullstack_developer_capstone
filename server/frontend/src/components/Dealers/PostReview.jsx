@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import "./Review.css";
 import "../assets/style.css";
 import Header from '../Header/Header';
+import Sidebar from '../SideBar/SideBar';
+import Box from '@mui/material/Box';
 
 
 const PostReview = () => {
@@ -130,6 +132,9 @@ const PostReview = () => {
   return (
     <div>
     <Header />
+    <Box sx={{ display: 'flex' }}>
+    <Sidebar  />
+    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
     <div className="review-form-container" style={{marginLeft:"20%"}}>
       <h1 className="dealer-name">{dealer.full_name}</h1>
       <div className="form-group">
@@ -190,6 +195,8 @@ const PostReview = () => {
         </button>
       </div>
     </div>
+    </Box>
+    </Box>
   </div>  
   )
 }
