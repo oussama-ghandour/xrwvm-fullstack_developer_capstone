@@ -51,7 +51,7 @@ table{
   }
 
   .reviews_panel {
-    
+    position: relative;
     column-gap: 1cm;
     overflow-wrap: normal;
     margin-top: 1cm;
@@ -75,8 +75,8 @@ table{
 }
 
 .emotion_icon {
-  align-self: center;
-  position:fixed;
+    align-self: center;
+    position:  sticky;
     width:40px;
     height:40px;
     background-color:#0C9;
@@ -84,6 +84,12 @@ table{
     border-radius:50px;
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
+}
+
+.icon_wrapper{
+       position: absolute;
+        top: 0; 
+        left: 0;
 }
 
 .review_icon {

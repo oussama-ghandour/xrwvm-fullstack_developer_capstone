@@ -32,6 +32,15 @@ const Dealer = () => {
   let reviews_url = `${root_url}djangoapp/reviews/dealer/${id}`;
   let post_review = root_url+`postreview/${id}`;
 
+  const dealerImages = {
+    1: "https://images.pexels.com/photos/18437102/pexels-photo-18437102.jpeg",
+    2: "https://images.pexels.com/photos/2127039/pexels-photo-2127039.jpeg",
+    3: "https://images.pexels.com/photos/120049/pexels-photo-120049.jpeg",
+    4: "https://images.pexels.com/photos/18108314/pexels-photo-18108314.jpeg",
+    5: "https://images.pexels.com/photos/235222/pexels-photo-235222.jpeg",
+  };
+  
+
   const get_dealer = async () => {
     try {
       const res = await fetch(dealer_url, { method: "GET" });
@@ -82,14 +91,24 @@ useEffect(() => {
         <Box sx={{ display: 'flex' }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <div style={{ marginTop: "50px", marginLeft: "30%", width:"30%"}}>
+        <div style={{ marginTop: "10px", marginLeft: "30%", width:"40%", height: "10%", display:"flex", justifyContent:"space-evenly"}}>
+            <div>
+                <Box>
+                    {dealerImages[id] && (
+                        <img src={dealerImages[id]} style={{ width: '200px', height: '200px', marginRight: '10px', borderRadius: '50%' }} />
+                    )}
+                </Box>
+          
+            </div>
             <Accordion>
             <AccordionSummary
                 expandIcon={<ArrowDownwardIcon />}
                 aria-controls="panel1-content"
                 id="panel1-header"
             >
-                <Typography style={{marginLeft:"100px"}} value="bold" aria-label="bold">{dealer.full_name}</Typography>
+                 <Typography style={{ display: 'flex', alignItems: 'center' }} value="bold" aria-label="bold">
+                  {dealer.full_name}
+                </Typography>
             </AccordionSummary>
             <AccordionDetails>
                 <div style={{display: "flex", width: "80%",marginLeft: "50px",justifyContent: "space-around"}}>
@@ -101,12 +120,12 @@ useEffect(() => {
             </AccordionDetails>
             </Accordion>
         </div>
-        <div style={{display: "flex",alignItems: "center",justifyContent:"space-evenly", marginLeft:"33%", width:"25%"}}>
+        <div style={{display: "flex",alignItems: "center",justifyContent:"space-evenly", marginLeft:"33%", width:"25%", marginTop:"12%"}}>
             <Button onClick={() => navigate(`/searchcars/${id}`)} variant="contained" style={{marginTop:"8px"}}>View Cars</Button>
             <h1 style={{ color: "grey", marginTop:"5px" }}>{postReview}</h1>
         </div>
 
-        <div className="reviews_panel">
+        <div className="reviews_panel"  style={{display: "flex"}}>
             {reviews.length === 0 && !unreviewed ? (
             <p>Loading Reviews....</p>
             ) : unreviewed ? (
@@ -114,7 +133,10 @@ useEffect(() => {
             ) : (
             reviews.map(review => (
                 <div className='review_panel' key={review.id}>
-                <img src={senti_icon(review.sentiment)} className="emotion_icon" alt='Sentiment' />
+                    <div className='icon_wrapper'>
+                        <img src={senti_icon(review.sentiment)} className="emotion_icon" alt='Sentiment'  />
+                    </div>
+                    
                 <div className='review'>{review.review}</div>
                 <div className="reviewer">{review.name} {review.car_make} {review.car_model} {review.car_year}</div>
                 </div>
