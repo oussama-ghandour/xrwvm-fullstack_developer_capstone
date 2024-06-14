@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import './SearchCars.css';
-import { Card, CardMedia } from '@mui/material';
+import { Box, Card, CardMedia } from '@mui/material';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Sidebar from '../SideBar/SideBar';
 
 function SearchCars() {
   const [cars, setCars] = useState([]);
@@ -54,7 +56,7 @@ const carImages = {
     const retobj = await res.json();
     if (retobj.status === 200) {
       let dealer = retobj.dealer;
-      setDealer({ "full_name": dealer[0].full_name });
+      setDealer({ "full_name": dealer[0].full_name, "city": dealer[0].city });
     }
   }
 
@@ -251,11 +253,17 @@ const carImages = {
   return (
     <div>
       <Header />
-      <h1 style={{ marginBottom: '20px', marginLeft: '60px', marginTop: '30px', fontSize: 'xx-large' }} className='gradient'>Welcome to {dealer.full_name}</h1>
+      <Box sx={{ display: 'flex' }}>
+      <Sidebar />
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}> 
+      <div style={{display:"flex", justifyContent:"space-between"}}>
+        <h1 style={{ marginBottom: '20px', marginLeft: '60px', marginTop: '30px', fontSize: 'xx-large' }} className='gradient'>Welcome to {dealer.full_name}</h1>
+        <h1 style={{fontSize:"medium"}}><LocationOnIcon/>{dealer.city}</h1>
+      </div>
       <h3 className='title-descr'>Here, you can find a way to select the right car based on your personal preferences</h3>
       <div>
         <div className='card-select'>
-          <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', padding: '13px' }}>
+          <div style={{ display: 'flex', padding: '13px' }}>
             <div style={{ width: "21%" }}>
               <span style={{ marginLeft: '10px', paddingLeft: '10px' }}>Make</span>
               <select style={{ marginLeft: '10px', marginRight: '10px', paddingLeft: '10px', borderRadius: '10px' }} name="make" id="make" onChange={SearchCarsByMake}>
@@ -302,7 +310,7 @@ const carImages = {
                 <option value='2020'>2020 or newer</option>
               </select>
             </div>
-            <div style={{ width: "15%" }}>
+            <div style={{ width: "20%" }}>
               <span style={{ marginLeft: '10px', paddingLeft: '10px' }}>Mileage</span>
               <select style={{ marginLeft: '10px', marginRight: '10px', paddingLeft: '10px', borderRadius: '10px' }} name="mileage" id="mileage" onChange={SearchCarsByMileage}>
                 <option selected value='all'> -- All -- </option>
@@ -354,6 +362,10 @@ const carImages = {
           </div>
         )}
       </div>
+      </Box>
+      
+      </Box>
+      
     </div>
   );
 };

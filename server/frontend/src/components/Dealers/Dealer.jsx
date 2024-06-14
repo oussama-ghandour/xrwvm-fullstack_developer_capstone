@@ -91,7 +91,7 @@ useEffect(() => {
         <Box sx={{ display: 'flex' }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <div style={{ marginTop: "10px", marginLeft: "30%", width:"40%", display:"flex", justifyContent:"space-evenly"}}>
+         <div style={{ marginTop: "10px", marginLeft: "30%", width:"40%", display:"flex", justifyContent:"space-evenly"}}>
             <div>
                 <Box>
                     {dealerImages[id] && (
