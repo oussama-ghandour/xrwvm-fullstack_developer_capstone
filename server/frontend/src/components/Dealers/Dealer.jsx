@@ -91,11 +91,11 @@ useEffect(() => {
         <Box sx={{ display: 'flex' }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <div style={{ marginTop: "10px", marginLeft: "30%", width:"40%", height: "10%", display:"flex", justifyContent:"space-evenly"}}>
+        <div style={{ marginTop: "10px", marginLeft: "30%", width:"40%", display:"flex", justifyContent:"space-evenly"}}>
             <div>
                 <Box>
                     {dealerImages[id] && (
-                        <img src={dealerImages[id]} style={{ width: '200px', height: '200px', marginRight: '10px', borderRadius: '50%' }} />
+                        <img src={dealerImages[id]} style={{ width: '400px', height: '200px', marginRight: '10px'}} />
                     )}
                 </Box>
           
@@ -111,7 +111,7 @@ useEffect(() => {
                 </Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <div style={{display: "flex", width: "80%",marginLeft: "50px",justifyContent: "space-around"}}>
+                <div style={{display: "flex", width: "80%",justifyContent: "space-around"}}>
                 <FmdGoodIcon style={{color:"#2196f3"}}/>
                 <Typography>
                     {dealer.city}, {dealer.address}, Zip - {dealer.zip}, {dealer.state}
@@ -120,7 +120,7 @@ useEffect(() => {
             </AccordionDetails>
             </Accordion>
         </div>
-        <div style={{display: "flex",alignItems: "center",justifyContent:"space-evenly", marginLeft:"33%", width:"25%", marginTop:"12%"}}>
+        <div style={{display: "flex",alignItems: "center",justifyContent:"space-evenly", marginLeft:"33%", width:"25%", marginTop:"4%"}}>
             <Button onClick={() => navigate(`/searchcars/${id}`)} variant="contained" style={{marginTop:"8px"}}>View Cars</Button>
             <h1 style={{ color: "grey", marginTop:"5px" }}>{postReview}</h1>
         </div>
