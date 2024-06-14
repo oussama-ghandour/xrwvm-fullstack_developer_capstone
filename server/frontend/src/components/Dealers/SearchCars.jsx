@@ -15,18 +15,37 @@ function SearchCars() {
   let dealer_url = `/djangoapp/get_inventory/${id}`;
   let fetch_url = `/djangoapp/dealer/${id}`;
 
-  // Sample car data including the image URL for the Audi TT
-  const sampleCar = {
-    make: "Audi",
-    model: "TT",
-    bodyType: "Convertible",
-    year: 2021,
-    dealer_id: 25,
-    mileage: 10000,
-    price: 70000,
-    image_url: "https://images.pexels.com/photos/14240209/pexels-photo-14240209.jpeg"
+// Dictionary of car images
+const carImages = {
+    "Audi TT": "https://images.pexels.com/photos/14240209/pexels-photo-14240209.jpeg",
+    "Mercedes GLE Coupe": "https://images.pexels.com/photos/193991/pexels-photo-193991.jpeg",
+    "Mercedes C-Class": "https://images.pexels.com/photos/18369292/pexels-photo-18369292.jpeg",
   };
-
+  
+  // Async func to cars make and model
+  const fetchCars = async () => {
+    const res = await fetch(dealer_url, {
+      method: "GET"
+    });
+    const retobj = await res.json();
+  
+    if (retobj.status === 200) {
+      let cars = Array.from(retobj.cars);
+  
+      // Update each car's image URL using the carImages dictionary
+      cars = cars.map(car => {
+        const carKey = `${car.make} ${car.model}`;
+        return {
+          ...car,
+          image_url: carImages[carKey] || 'default_image_url_here' // Provide a default image URL if not found
+        };
+      });
+  
+      setCars(cars);
+      populateMakesAndModels(cars);
+    }
+  }
+  
   // Async func to extract the full name of dealer
   const fetchDealer = async () => {
     const res = await fetch(fetch_url, {
@@ -51,19 +70,6 @@ function SearchCars() {
   }
 
   // Async func to cars make and model
-  const fetchCars = async () => {
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-
-    if (retobj.status === 200) {
-      let cars = Array.from(retobj.cars);
-      cars.push(sampleCar); // Add the sample car data to the cars array
-      setCars(cars);
-      populateMakesAndModels(cars);
-    }
-  }
 
   const setCarsmatchingCriteria = async (matching_cars) => {
     let cars = Array.from(matching_cars);
@@ -116,6 +122,15 @@ function SearchCars() {
                 car.price > 80000
       );
     }
+
+      // Reassign image URLs based on the carImages dictionary
+    cars = cars.map(car => {
+        const carKey = `${car.make} ${car.model}`;
+        return {
+        ...car,
+        image_url: carImages[carKey] || 'default_image_url_here' // Provide a default image URL if not found
+        };
+    });
 
     if (cars.length === 0) {
       setMessage("No cars found matching criteria");
@@ -321,15 +336,17 @@ function SearchCars() {
           <div>
             <hr />
             {cars.map((car) => (
-              <div key={car._id} style={{ marginLeft: "70%" }}>
+              <div key={car._id} style={{display:"flex", justifyContent:"space-between"}}>
+                <div style={{width:"400px", marginLeft:"100px"}}>
+                <Card>
+                    <CardMedia component="img" image={car.image_url} alt={`${car.make} ${car.model}`} />
+                  </Card>
+                </div>
                 <div>
                   <h3>{car.make} {car.model}</h3>
                   <p>Year: {car.year}</p>
                   <p>Mileage: {car.mileage}</p>
                   <p>Price: {car.price}</p>
-                  <Card>
-                    <CardMedia component="img" image={car.image_url} alt={`${car.make} ${car.model}`} />
-                  </Card>
                 </div>
                 <hr />
               </div>
